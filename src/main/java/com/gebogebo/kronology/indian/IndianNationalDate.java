@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.ChronoPeriod;
+import java.time.chrono.IsoChronology;
 import java.time.temporal.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,9 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
      * Serialization version.
      */
     private static final long serialVersionUID = -8252231876281470680L;
+
+    private static final short daysInALeapYear = 366;
+    private static final short daysInANonLeapYear = 365;
 
     /**
      * Internal data objects to represent Indian months using {@code IndianMonth} instances.
@@ -81,13 +85,41 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
     private final int year;
     private final int month;
     private final int dayOfMonth;
+    private final LocalDate localDate;
+
+    /**
+     * Creates an instance with given proleptic year, month and day and a {@link LocalDate} instance.
+     *
+     * @param prolepticYear  Indian proleptic-year
+     * @param month          Indian month-of-year, from 1 to 12
+     * @param dayOfMonth     Indian day-of-month, from 1 to 31
+     * @param localDate      corresponding {@link LocalDate} instance
+     */
+    private IndianNationalDate(int prolepticYear, int month, int dayOfMonth, LocalDate localDate) {
+        this.era = IndianEra.of(prolepticYear <= 0 ? 0 : 1);
+        this.year = prolepticYear;
+        this.month = month;
+        this.dayOfMonth = dayOfMonth;
+        this.localDate = localDate;
+    }
+
+    /**
+     * Creates an instance with given proleptic year, month and day.
+     *
+     * @param prolepticYear  the indian proleptic-year
+     * @param month          the Indian month-of-year, from 1 to 12
+     * @param dayOfMonth     the Indian day-of-month, from 1 to 31
+     */
+    /* pkg pvt */ IndianNationalDate(int prolepticYear, int month, int dayOfMonth) {
+        this(prolepticYear, month, dayOfMonth, toLocalDate(prolepticYear, month, dayOfMonth));
+    }
 
     /**
      * Obtains the current {@code IndianNationalDate} from the {@code LocalDate} instance.
      *
-     * @param localDate  the localDate to use
-     * @return the {@code IndianNationalDate} instance corresponding to the given {@code LocalDate}.
-     * @throws DateTimeException If the given {@code LocalDate} can't be mapped to a {@code IndianNationalDate}.
+     * @param localDate           the localDate to use
+     * @return                    the {@code IndianNationalDate} instance corresponding to the given {@code LocalDate}.
+     * @throws DateTimeException  If the given {@code LocalDate} can't be mapped to a {@code IndianNationalDate}.
      */
     public static IndianNationalDate of(LocalDate localDate) {
         int dayOfYear = localDate.get(ChronoField.DAY_OF_YEAR);
@@ -97,22 +129,42 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
                 .findFirst()
                 .map(m -> new IndianNationalDate(localDate.get(YEAR) + m.yearDelta - YEARS_BEHIND_ISO_YEAR,
                         m.indianMonth,
-                        m.getIndianDayOfMonth(dayOfYear)))
+                        m.getIndianDayOfMonth(dayOfYear),
+                        localDate))
                 .orElseThrow(() -> new DateTimeException(String.format("Can't convert %s to Indian date.", localDate.toString())));
     }
 
     /**
-     * Creates an instance with given proleptic year, month and day.
+     * Gets a corresponding Iso date for a given Indian date.
      *
-     * @param prolepticYear  the indian proleptic-year
-     * @param month  the Indian month-of-year, from 1 to 12
-     * @param dayOfMonth  the Indian day-of-month, from 1 to 31
+     * @param indianProlepticYear  Indian year
+     * @param indianMonth          Indian month
+     * @param indianDayOfMonth     Indian day of month
+     * @return                     a {@link LocalDate} instance corresponding to the given Indian date
+     * @throws DateTimeException   if the Indian date parameters are invalid
      */
-    /* pkg pvt */ IndianNationalDate(int prolepticYear, int month, int dayOfMonth) {
-        this.era = IndianEra.of(prolepticYear <= 0 ? 0 : 1);
-        this.year = prolepticYear;
-        this.month = month;
-        this.dayOfMonth = dayOfMonth;
+    public static LocalDate toLocalDate(int indianProlepticYear, int indianMonth, int indianDayOfMonth) {
+        // corresponding isoYear
+        int isoYear = indianProlepticYear +
+                        (isNextIsoYear(indianMonth, indianDayOfMonth) ? 1 : 0) +
+                        YEARS_BEHIND_ISO_YEAR;
+
+        boolean isLeapYear = IsoChronology.INSTANCE.isLeapYear(isoYear);
+        IndianMonth filteredIndianMonth = (isLeapYear ? leapMonths : months)
+                .stream()
+                .filter(m -> m.indianMonth == indianMonth)
+                .findFirst()
+                .orElseThrow(() -> new DateTimeException(""));
+
+        // iso day of the year
+        int dayOfYear = (int)filteredIndianMonth.isoDayOfYearRange.getMinimum() + indianDayOfMonth - 1;
+
+        int daysInYear = isLeapYear ? daysInALeapYear  : daysInANonLeapYear;
+        // if iso day of the year exceeds the number of days in this year, we adjust accordingly
+        if(dayOfYear > daysInYear) {
+            dayOfYear = dayOfYear - daysInYear;
+        }
+        return LocalDate.ofYearDay(isoYear, dayOfYear);
     }
 
     /**
@@ -137,12 +189,15 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
      */
     @Override
     public int lengthOfMonth() {
+        // Vaishaka to Bhadra
         if(month >= 2 && month <= 6) {
             return 31;
         }
+        // Ashwin to Phalguna
         if(month >= 7 && month <= 12) {
             return 30;
         }
+        // Chaitra
         if(month == 1) {
             return isLeapYear() ? 31 : 30;
         }
@@ -151,14 +206,20 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
 
     @Override
     public long until(Temporal endExclusive, TemporalUnit unit) {
-        //TODO: implement this
-        throw new UnsupportedOperationException("This operation will be implemented soon");
+        if(!(endExclusive instanceof IndianNationalDate)) {
+            throw new UnsupportedOperationException("This operation is supported for dates from IndianChronology only");
+        }
+        IndianNationalDate indianEndDate = (IndianNationalDate) endExclusive;
+        return localDate.until(indianEndDate.localDate, unit);
     }
 
     @Override
     public ChronoPeriod until(ChronoLocalDate endDateExclusive) {
-        //TODO: implement this
-        throw new UnsupportedOperationException("This operation will be implemented soon");
+        if(!(endDateExclusive instanceof IndianNationalDate)) {
+            throw new UnsupportedOperationException("This operation is supported for dates from IndianChronology only");
+        }
+        IndianNationalDate indianEndDate = (IndianNationalDate) endDateExclusive;
+        return localDate.until(indianEndDate.localDate);
     }
 
     @Override
@@ -247,7 +308,27 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
     }
 
     /**
+     * Determines if a given Indian month and day falls in the same Iso year or in the next one.
+     *
+     * <p>
+     *     Indian year doesn't align with the Iso year perfectly. Indian year starts on March 21/22 because of which it
+     *     is possible that the Indian year number stays the same but the corresponding Iso year number changes. This
+     *     method can be used to determine if the given Indian date falls in the same Iso year or in the next.
+     *
+     * @param indianMonth       month of an Indian date
+     * @param indianDayOfMonth  day of month of an Indian date
+     * @return                  <code>true</code> if the given Indian date falls in the next Iso year,
+     *                          <code>false</code> otherwise.
+     */
+    private static boolean isNextIsoYear(int indianMonth, int indianDayOfMonth) {
+        if(indianMonth < 10) return false;  // for the first 9 months (Chaitra to Agrahayana)
+        if(indianMonth > 10) return true;   // for the last 2 months (Magha and Phalguna)
+        return indianDayOfMonth > 10;       // if the month is Pausa and day is more than 10
+    }
+
+    /**
      * An internal representation of a month in Saka chronology.
+     *
      * <p>
      * Use this class to translate Iso date into corresponding Saka date.
      *
@@ -259,6 +340,14 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
         private final int indianMonth;
         private final int yearDelta;
 
+        /**
+         * A private constructor to initialize an instance with the given parameters.
+         *
+         * @param indianMonth      Indian month for this instance
+         * @param minIsoDayOfYear  minimum iso day of year corresponding to this Indian month
+         * @param maxIsoDayOfYear  maximum iso day of year corresponding to this Indian month
+         * @param yearDelta        the difference between the Iso year and the Indian year for this month
+         */
         private IndianMonth(int indianMonth, int minIsoDayOfYear, int maxIsoDayOfYear, int yearDelta) {
             this.indianMonth = indianMonth;
             this.isoDayOfYearRange = ValueRange.of(minIsoDayOfYear, maxIsoDayOfYear);
@@ -269,6 +358,12 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
             return isoDayOfYearRange.isValidIntValue(isoDayOfYear);
         }
 
+        /**
+         * Gets a day of month in the Indian calendar for the given Iso day of year.
+         *
+         * @param isoDayOfYear  Iso day of year
+         * @return              a day of month in this Indian month
+         */
         private int getIndianDayOfMonth(int isoDayOfYear) {
             if(!isThisMonth(isoDayOfYear)) {
                 throw new DateTimeException("");

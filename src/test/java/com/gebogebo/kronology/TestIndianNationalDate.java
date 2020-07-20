@@ -21,7 +21,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIsoEpochTime() {
-        testIndianNationalDate(new int[] {0, 1, 1}, new int[] {-79, 10, 11});
+        testTranslation(new int[] {0, 1, 1}, new int[] {-79, 10, 11});
     }
 
     /**
@@ -29,7 +29,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIndianEpochTime() {
-        testIndianNationalDate(new int[] {78, 3, 22}, new int[] {0, 1, 1});
+        testTranslation(new int[] {78, 3, 22}, new int[] {0, 1, 1});
     }
 
     /**
@@ -37,7 +37,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIndianNewYear() {
-        testIndianNationalDate(new int[] {2019, 3, 22}, new int[] {1941, 1, 1});
+        testTranslation(new int[] {2019, 3, 22}, new int[] {1941, 1, 1});
     }
 
     /**
@@ -45,7 +45,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIsoNewYear() {
-        testIndianNationalDate(new int[] {2019, 1, 1}, new int[] {1940, 10, 11});
+        testTranslation(new int[] {2019, 1, 1}, new int[] {1940, 10, 11});
     }
 
     /**
@@ -53,7 +53,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIndianNewLeapYear() {
-        testIndianNationalDate(new int[] {2020, 3, 21}, new int[] {1942, 1, 1});
+        testTranslation(new int[] {2020, 3, 21}, new int[] {1942, 1, 1});
     }
 
     /**
@@ -61,7 +61,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIsoNewLeapYear() {
-        testIndianNationalDate(new int[] {2020, 1, 1}, new int[] {1941, 10, 11});
+        testTranslation(new int[] {2020, 1, 1}, new int[] {1941, 10, 11});
     }
 
     /**
@@ -69,7 +69,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testLastDayOfYearInLeapYear() {
-        testIndianNationalDate(new int[] {2020, 3, 20}, new int[] {1941, 12, 30});
+        testTranslation(new int[] {2020, 3, 20}, new int[] {1941, 12, 30});
     }
 
     /**
@@ -77,7 +77,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIsoLastDayOfYearInLeapYear() {
-        testIndianNationalDate(new int[] {2020, 12, 31}, new int[] {1942, 10, 10});
+        testTranslation(new int[] {2020, 12, 31}, new int[] {1942, 10, 10});
     }
 
     /**
@@ -85,7 +85,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testLastDayOfYearInNonLeapYear() {
-        testIndianNationalDate(new int[] {2019, 3, 20}, new int[] {1940, 12, 29});
+        testTranslation(new int[] {2019, 3, 20}, new int[] {1940, 12, 29});
     }
 
     /**
@@ -93,7 +93,7 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIsoLastDayOfYearInNonLeapYear() {
-        testIndianNationalDate(new int[] {2019, 12, 31}, new int[] {1941, 10, 10});
+        testTranslation(new int[] {2019, 12, 31}, new int[] {1941, 10, 10});
     }
 
     /**
@@ -101,18 +101,18 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testSakaMonthStartNonLeapYear() {
-        testIndianNationalDate(new int[] {2018, 3, 22}, new int[] {1940, 1, 1});
-        testIndianNationalDate(new int[] {2018, 4, 21}, new int[] {1940, 2, 1});
-        testIndianNationalDate(new int[] {2018, 5, 22}, new int[] {1940, 3, 1});
-        testIndianNationalDate(new int[] {2018, 6, 22}, new int[] {1940, 4, 1});
-        testIndianNationalDate(new int[] {2018, 7, 23}, new int[] {1940, 5, 1});
-        testIndianNationalDate(new int[] {2018, 8, 23}, new int[] {1940, 6, 1});
-        testIndianNationalDate(new int[] {2018, 9, 23}, new int[] {1940, 7, 1});
-        testIndianNationalDate(new int[] {2018, 10, 23}, new int[] {1940, 8, 1});
-        testIndianNationalDate(new int[] {2018, 11, 22}, new int[] {1940, 9, 1});
-        testIndianNationalDate(new int[] {2018, 12, 22}, new int[] {1940, 10, 1});
-        testIndianNationalDate(new int[] {2018, 1, 21}, new int[] {1939, 11, 1});
-        testIndianNationalDate(new int[] {2018, 2, 20}, new int[] {1939, 12, 1});
+        testTranslation(new int[] {2018, 3, 22}, new int[] {1940, 1, 1});
+        testTranslation(new int[] {2018, 4, 21}, new int[] {1940, 2, 1});
+        testTranslation(new int[] {2018, 5, 22}, new int[] {1940, 3, 1});
+        testTranslation(new int[] {2018, 6, 22}, new int[] {1940, 4, 1});
+        testTranslation(new int[] {2018, 7, 23}, new int[] {1940, 5, 1});
+        testTranslation(new int[] {2018, 8, 23}, new int[] {1940, 6, 1});
+        testTranslation(new int[] {2018, 9, 23}, new int[] {1940, 7, 1});
+        testTranslation(new int[] {2018, 10, 23}, new int[] {1940, 8, 1});
+        testTranslation(new int[] {2018, 11, 22}, new int[] {1940, 9, 1});
+        testTranslation(new int[] {2018, 12, 22}, new int[] {1940, 10, 1});
+        testTranslation(new int[] {2018, 1, 21}, new int[] {1939, 11, 1});
+        testTranslation(new int[] {2018, 2, 20}, new int[] {1939, 12, 1});
     }
 
     /**
@@ -120,18 +120,18 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIsoMonthStartNonLeapYear() {
-        testIndianNationalDate(new int[] {2018, 1, 1}, new int[] {1939, 10, 11});
-        testIndianNationalDate(new int[] {2018, 2, 1}, new int[] {1939, 11, 12});
-        testIndianNationalDate(new int[] {2018, 3, 1}, new int[] {1939, 12, 10});
-        testIndianNationalDate(new int[] {2018, 4, 1}, new int[] {1940, 1, 11});
-        testIndianNationalDate(new int[] {2018, 5, 1}, new int[] {1940, 2, 11});
-        testIndianNationalDate(new int[] {2018, 6, 1}, new int[] {1940, 3, 11});
-        testIndianNationalDate(new int[] {2018, 7, 1}, new int[] {1940, 4, 10});
-        testIndianNationalDate(new int[] {2018, 8, 1}, new int[] {1940, 5, 10});
-        testIndianNationalDate(new int[] {2018, 9, 1}, new int[] {1940, 6, 10});
-        testIndianNationalDate(new int[] {2018, 10, 1}, new int[] {1940, 7, 9});
-        testIndianNationalDate(new int[] {2018, 11, 1}, new int[] {1940, 8, 10});
-        testIndianNationalDate(new int[] {2018, 12, 1}, new int[] {1940, 9, 10});
+        testTranslation(new int[] {2018, 1, 1}, new int[] {1939, 10, 11});
+        testTranslation(new int[] {2018, 2, 1}, new int[] {1939, 11, 12});
+        testTranslation(new int[] {2018, 3, 1}, new int[] {1939, 12, 10});
+        testTranslation(new int[] {2018, 4, 1}, new int[] {1940, 1, 11});
+        testTranslation(new int[] {2018, 5, 1}, new int[] {1940, 2, 11});
+        testTranslation(new int[] {2018, 6, 1}, new int[] {1940, 3, 11});
+        testTranslation(new int[] {2018, 7, 1}, new int[] {1940, 4, 10});
+        testTranslation(new int[] {2018, 8, 1}, new int[] {1940, 5, 10});
+        testTranslation(new int[] {2018, 9, 1}, new int[] {1940, 6, 10});
+        testTranslation(new int[] {2018, 10, 1}, new int[] {1940, 7, 9});
+        testTranslation(new int[] {2018, 11, 1}, new int[] {1940, 8, 10});
+        testTranslation(new int[] {2018, 12, 1}, new int[] {1940, 9, 10});
     }
 
     /**
@@ -139,18 +139,18 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testSakaMonthStartLeapYear() {
-        testIndianNationalDate(new int[] {2020, 3, 21}, new int[] {1942, 1, 1});
-        testIndianNationalDate(new int[] {2020, 4, 21}, new int[] {1942, 2, 1});
-        testIndianNationalDate(new int[] {2020, 5, 22}, new int[] {1942, 3, 1});
-        testIndianNationalDate(new int[] {2020, 6, 22}, new int[] {1942, 4, 1});
-        testIndianNationalDate(new int[] {2020, 7, 23}, new int[] {1942, 5, 1});
-        testIndianNationalDate(new int[] {2020, 8, 23}, new int[] {1942, 6, 1});
-        testIndianNationalDate(new int[] {2020, 9, 23}, new int[] {1942, 7, 1});
-        testIndianNationalDate(new int[] {2020, 10, 23}, new int[] {1942, 8, 1});
-        testIndianNationalDate(new int[] {2020, 11, 22}, new int[] {1942, 9, 1});
-        testIndianNationalDate(new int[] {2020, 12, 22}, new int[] {1942, 10, 1});
-        testIndianNationalDate(new int[] {2020, 1, 21}, new int[] {1941, 11, 1});
-        testIndianNationalDate(new int[] {2020, 2, 20}, new int[] {1941, 12, 1});
+        testTranslation(new int[] {2020, 3, 21}, new int[] {1942, 1, 1});
+        testTranslation(new int[] {2020, 4, 21}, new int[] {1942, 2, 1});
+        testTranslation(new int[] {2020, 5, 22}, new int[] {1942, 3, 1});
+        testTranslation(new int[] {2020, 6, 22}, new int[] {1942, 4, 1});
+        testTranslation(new int[] {2020, 7, 23}, new int[] {1942, 5, 1});
+        testTranslation(new int[] {2020, 8, 23}, new int[] {1942, 6, 1});
+        testTranslation(new int[] {2020, 9, 23}, new int[] {1942, 7, 1});
+        testTranslation(new int[] {2020, 10, 23}, new int[] {1942, 8, 1});
+        testTranslation(new int[] {2020, 11, 22}, new int[] {1942, 9, 1});
+        testTranslation(new int[] {2020, 12, 22}, new int[] {1942, 10, 1});
+        testTranslation(new int[] {2020, 1, 21}, new int[] {1941, 11, 1});
+        testTranslation(new int[] {2020, 2, 20}, new int[] {1941, 12, 1});
     }
 
     /**
@@ -158,31 +158,53 @@ public class TestIndianNationalDate {
      */
     @Test
     public void testIsoMonthStartLeapYear() {
-        testIndianNationalDate(new int[] {2020, 1, 1}, new int[] {1941, 10, 11});
-        testIndianNationalDate(new int[] {2020, 2, 1}, new int[] {1941, 11, 12});
-        testIndianNationalDate(new int[] {2020, 3, 1}, new int[] {1941, 12, 11});
-        testIndianNationalDate(new int[] {2020, 4, 1}, new int[] {1942, 1, 12});
-        testIndianNationalDate(new int[] {2020, 5, 1}, new int[] {1942, 2, 11});
-        testIndianNationalDate(new int[] {2020, 6, 1}, new int[] {1942, 3, 11});
-        testIndianNationalDate(new int[] {2020, 7, 1}, new int[] {1942, 4, 10});
-        testIndianNationalDate(new int[] {2020, 8, 1}, new int[] {1942, 5, 10});
-        testIndianNationalDate(new int[] {2020, 9, 1}, new int[] {1942, 6, 10});
-        testIndianNationalDate(new int[] {2020, 10, 1}, new int[] {1942, 7, 9});
-        testIndianNationalDate(new int[] {2020, 11, 1}, new int[] {1942, 8, 10});
-        testIndianNationalDate(new int[] {2020, 12, 1}, new int[] {1942, 9, 10});
+        testTranslation(new int[] {2020, 1, 1}, new int[] {1941, 10, 11});
+        testTranslation(new int[] {2020, 2, 1}, new int[] {1941, 11, 12});
+        testTranslation(new int[] {2020, 3, 1}, new int[] {1941, 12, 11});
+        testTranslation(new int[] {2020, 4, 1}, new int[] {1942, 1, 12});
+        testTranslation(new int[] {2020, 5, 1}, new int[] {1942, 2, 11});
+        testTranslation(new int[] {2020, 6, 1}, new int[] {1942, 3, 11});
+        testTranslation(new int[] {2020, 7, 1}, new int[] {1942, 4, 10});
+        testTranslation(new int[] {2020, 8, 1}, new int[] {1942, 5, 10});
+        testTranslation(new int[] {2020, 9, 1}, new int[] {1942, 6, 10});
+        testTranslation(new int[] {2020, 10, 1}, new int[] {1942, 7, 9});
+        testTranslation(new int[] {2020, 11, 1}, new int[] {1942, 8, 10});
+        testTranslation(new int[] {2020, 12, 1}, new int[] {1942, 9, 10});
     }
 
     /**
-     * A utility method to test conversion from isoDate to indianDate.
+     * A utility method to test conversion between isoDate and indianDate.
      *
      * @param isoDates     Iso date components in the order of year, month and day of month.
      * @param indianDates  Indian date components in the order of year, month and day of month.
      */
-    private static void testIndianNationalDate(int[] isoDates, int[] indianDates) {
+    private static void testTranslation(int[] isoDates, int[] indianDates) {
+        compareIndianDateFromLocalDateComponents(isoDates, indianDates);
+        compareIsoDateFromIndianDateComponents(isoDates, indianDates);
+    }
+
+    /**
+     * Tests the Indian date's components (year, month and day of month) by instantiating an Indian date from a local
+     * date.
+     */
+    private static void compareIndianDateFromLocalDateComponents(int[] isoDates, int[] indianDates) {
         LocalDate isoLocalDate = LocalDate.of(isoDates[0], isoDates[1], isoDates[2]);
-        IndianNationalDate indianNationalDate = IndianNationalDate.of(isoLocalDate);
-        assertThat("year doesn't match", indianNationalDate.get(YEAR), is(indianDates[0]));
-        assertThat("month doesn't match", indianNationalDate.get(MONTH_OF_YEAR), is(indianDates[1]));
-        assertThat("day doesn't match", indianNationalDate.get(DAY_OF_MONTH), is(indianDates[2]));
+        // create an Indian date from Iso date and verify expectations
+        IndianNationalDate indianDate = IndianNationalDate.of(isoLocalDate);
+        assertThat("fromIsoDate(): year doesn't match", indianDate.get(YEAR), is(indianDates[0]));
+        assertThat("fromIsoDate(): month doesn't match", indianDate.get(MONTH_OF_YEAR), is(indianDates[1]));
+        assertThat("fromIsoDate(): day doesn't match", indianDate.get(DAY_OF_MONTH), is(indianDates[2]));
+    }
+
+    /**
+     * Tests the Iso date's components (year, month and day of month) by instantiating an Iso date from Indian date
+     * components.
+     */
+    private static void compareIsoDateFromIndianDateComponents(int[] isoDates, int[] indianDates) {
+        // create Iso date from Indian date and verify expectations
+        LocalDate d = IndianNationalDate.toLocalDate(indianDates[0], indianDates[1], indianDates[2]);
+        assertThat("fromIndianDate(): year doesn't match", d.getYear(), is(isoDates[0]));
+        assertThat("fromIndianDate(): month doesn't match", d.getMonthValue(), is(isoDates[1]));
+        assertThat("fromIndianDate(): day of month doesn't match", d.getDayOfMonth(), is(isoDates[2]));
     }
 }
