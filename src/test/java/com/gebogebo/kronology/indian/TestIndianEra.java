@@ -1,6 +1,5 @@
-package com.gebogebo.kronology;
+package com.gebogebo.kronology.indian;
 
-import com.gebogebo.kronology.indian.IndianEra;
 import org.junit.Test;
 import static com.gebogebo.kronology.indian.IndianEra.*;
 import static org.hamcrest.CoreMatchers.is;

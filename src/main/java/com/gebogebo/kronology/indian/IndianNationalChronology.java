@@ -67,8 +67,7 @@ public class IndianNationalChronology extends AbstractChronology {
 
     @Override
     public ChronoLocalDate dateYearDay(int prolepticYear, int dayOfYear) {
-        //TODO: implement this
-        throw new UnsupportedOperationException("This operation will be implemented soon");
+        return IndianNationalDate.of(prolepticYear, dayOfYear);
     }
 
     @Override

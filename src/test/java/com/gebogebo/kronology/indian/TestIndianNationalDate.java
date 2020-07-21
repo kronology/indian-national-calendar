@@ -1,6 +1,5 @@
-package com.gebogebo.kronology;
+package com.gebogebo.kronology.indian;
 
-import com.gebogebo.kronology.indian.IndianNationalDate;
 import org.junit.Test;
 import static java.time.temporal.ChronoField.*;
 import static org.hamcrest.CoreMatchers.is;

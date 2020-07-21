@@ -1,4 +1,4 @@
-package com.gebogebo.kronology;
+package com.gebogebo.kronology.indian;
 
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.notNullValue;

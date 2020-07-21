@@ -115,6 +115,22 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
     }
 
     /**
+     * @param prolepticYear  the indian proleptic-year
+     * @param dayOfYear      the Indian day-of-month, from 1 to 31
+     */
+    public static IndianNationalDate of(int prolepticYear, int dayOfYear) {
+        boolean isLeapYear = IsoChronology.INSTANCE.isLeapYear(prolepticYear + YEARS_BEHIND_ISO_YEAR);
+        int daysInYear = isLeapYear ? daysInALeapYear : daysInANonLeapYear;
+        if(dayOfYear < 1 || dayOfYear > daysInYear) {
+            throw new DateTimeException(String.format("Invalid value for DayOfYear (valid values 1 - 365/66): %d",
+                                            dayOfYear));
+        }
+        int isoYear = prolepticYear + YEARS_BEHIND_ISO_YEAR + ((dayOfYear + 80) > daysInYear ? 1 : 0);
+        int isoDayOfYear = (dayOfYear + 80) % daysInYear;
+        return of(LocalDate.ofYearDay(isoYear, isoDayOfYear));
+    }
+
+    /**
      * Obtains the current {@code IndianNationalDate} from the {@code LocalDate} instance.
      *
      * @param localDate           the localDate to use

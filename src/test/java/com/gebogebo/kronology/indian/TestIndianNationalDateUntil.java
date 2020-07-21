@@ -1,6 +1,5 @@
-package com.gebogebo.kronology;
+package com.gebogebo.kronology.indian;
 
-import com.gebogebo.kronology.indian.IndianNationalDate;
 import org.junit.Test;
 import static com.gebogebo.kronology.indian.IndianNationalDate.of;
 import static java.time.LocalDate.now;
@@ -16,7 +15,7 @@ import java.time.temporal.TemporalUnit;
 
 /**
  * Tests the {@link ChronoLocalDate#until} and {@link ChronoLocalDate#until(Temporal, TemporalUnit)}of
- * {@link com.gebogebo.kronology.indian.IndianNationalDate}.
+ * {@link IndianNationalDate}.
  *
  * @author viraj
  * @since Jul 2020
@@ -61,6 +60,13 @@ public class TestIndianNationalDateUntil {
         compareUntilValues(ld1, ld2);
     }
 
+    @Test
+    public void testNegativeProplecticYear() {
+        LocalDate ld1 = LocalDate.of(-100, 1, 1);
+        LocalDate ld2 = LocalDate.of(-100, 8, 12);
+        compareUntilValues(ld1, ld2);
+    }
+
     /**
      * Tests the output of {@code until} for {@link LocalDate} and {@link IndianNationalDate}.
      *
@@ -78,6 +84,7 @@ public class TestIndianNationalDateUntil {
         IndianNationalDate id1 = of(ld1);
         IndianNationalDate id2 = of(ld2);
         assertThat(id1.until(id2), is(ld1.until(ld2)));
+        assertThat(id2.until(id1), is(ld2.until(ld1))); // test reverse
 
         assertThat(id1.until(id2, YEARS), is(ld1.until(ld2, YEARS)));
         assertThat(id1.until(id2, MONTHS), is(ld1.until(ld2, MONTHS)));
