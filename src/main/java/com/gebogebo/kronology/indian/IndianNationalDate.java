@@ -304,7 +304,7 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
 
     @Override
     public String toString() {
-        return String.format("%d-%02d-%02d", year, month, dayOfMonth);
+        return String.format("%04d-%02d-%02d", year, month, dayOfMonth);
     }
 
     @Override

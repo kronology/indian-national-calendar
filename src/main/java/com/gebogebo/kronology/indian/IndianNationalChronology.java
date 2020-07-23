@@ -3,6 +3,7 @@ package com.gebogebo.kronology.indian;
 import static java.lang.String.format;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.chrono.AbstractChronology;
 import java.time.chrono.ChronoLocalDate;
 import java.time.chrono.Era;
@@ -49,6 +50,7 @@ import java.util.List;
  */
 public class IndianNationalChronology extends AbstractChronology {
     /* pkg pvt */ static final int YEARS_BEHIND_ISO_YEAR = 78;
+    /* pkg pvt */ static final int epochDayWrtIso = -690958;
 
     public static final IndianNationalChronology INSTANCE = new IndianNationalChronology();
 
@@ -72,8 +74,8 @@ public class IndianNationalChronology extends AbstractChronology {
 
     @Override
     public ChronoLocalDate dateEpochDay(long epochDay) {
-        //TODO: implement this
-        throw new UnsupportedOperationException("This operation will be implemented soon");
+        // note: epoch day starts from 0 and the negative values are allowed
+        return IndianNationalDate.of(LocalDate.ofEpochDay(epochDay + epochDayWrtIso));
     }
 
     @Override

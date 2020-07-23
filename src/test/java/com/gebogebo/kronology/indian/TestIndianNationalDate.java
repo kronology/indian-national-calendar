@@ -190,6 +190,8 @@ public class TestIndianNationalDate {
         LocalDate isoLocalDate = LocalDate.of(isoDates[0], isoDates[1], isoDates[2]);
         // create an Indian date from Iso date and verify expectations
         IndianNationalDate indianDate = IndianNationalDate.of(isoLocalDate);
+        // validates that the format is always yyyy-mm-dd
+        assertThat(indianDate.toString().length(), is(10));
         assertThat("fromIsoDate(): year doesn't match", indianDate.get(YEAR), is(indianDates[0]));
         assertThat("fromIsoDate(): month doesn't match", indianDate.get(MONTH_OF_YEAR), is(indianDates[1]));
         assertThat("fromIsoDate(): day doesn't match", indianDate.get(DAY_OF_MONTH), is(indianDates[2]));
