@@ -4,10 +4,7 @@ import static java.lang.String.format;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.chrono.AbstractChronology;
-import java.time.chrono.ChronoLocalDate;
-import java.time.chrono.Era;
-import java.time.chrono.IsoChronology;
+import java.time.chrono.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.ValueRange;
@@ -46,18 +43,47 @@ import java.util.List;
  * All the methods accept and return non-null values.
  *
  * @author viraj
- * @since Jul 2020
+ * @since Aashad 1942 (Jul 2020)
  */
 public class IndianNationalChronology extends AbstractChronology {
+    /**
+     * The number of years that the Indian national calendar is behind the Iso calendar.
+     */
     /* pkg pvt */ static final int YEARS_BEHIND_ISO_YEAR = 78;
-    /* pkg pvt */ static final int epochDayWrtIso = -690958;
 
+    /**
+     * The number of days to add to the Iso epoch day to get the epoch day of Indian current era.
+     */
+    /* pkg pvt */ static final int EPOCH_DAY_WRT_ISO = -690958;
+
+    /**
+     * A public static instance of this class.
+     */
     public static final IndianNationalChronology INSTANCE = new IndianNationalChronology();
 
+    /**
+     * Gets the Id for this {@code Chronology}.
+     *
+     * <p>
+     *     This value is used in the service registry as an id for this {@code Chronology}.
+     *     This value is expected to be unique across in the system. The behavior of the service
+     *     loader when the id conflicts is undefined.
+     *
+     * @return  id of this {@code Chronology}
+     */
     public String getId() {
         return "Indian";
     }
 
+    /**
+     * Gets the calendar type for this {@code Chronology}.
+     *
+     * <p>
+     *     This value is used in the service registry as a type of the calendar represented by
+     *     this {@code Chronology}.
+     *
+     * @return  type of the calendar represented by this {@code Chronology}
+     */
     public String getCalendarType() {
         return "indian";
     }
@@ -75,13 +101,20 @@ public class IndianNationalChronology extends AbstractChronology {
     @Override
     public ChronoLocalDate dateEpochDay(long epochDay) {
         // note: epoch day starts from 0 and the negative values are allowed
-        return IndianNationalDate.of(LocalDate.ofEpochDay(epochDay + epochDayWrtIso));
+        return IndianNationalDate.of(LocalDate.ofEpochDay(epochDay + EPOCH_DAY_WRT_ISO));
     }
 
     @Override
     public ChronoLocalDate date(TemporalAccessor temporal) {
-        //TODO: implement this
-        throw new UnsupportedOperationException("This operation will be implemented soon");
+        if (temporal instanceof IndianNationalDate) {
+            return (IndianNationalDate) temporal;
+        }
+        try {
+            return IndianNationalDate.of(LocalDate.from(temporal));
+        } catch (DateTimeException e) {
+            throw new DateTimeException(format("Unable to obtain IndianDate from TemporalAccessor: %s of type %s",
+                                        temporal, temporal.getClass()));
+        }
     }
 
     @Override

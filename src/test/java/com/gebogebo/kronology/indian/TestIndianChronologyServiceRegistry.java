@@ -10,7 +10,7 @@ import java.time.chrono.Chronology;
  * Tests the Chronology's registration in META-INF.services.
  *
  * @author viraj
- * @since Jul 2020
+ * @since Aashadh 1942 (Jul 2020)
  */
 public class TestIndianChronologyServiceRegistry {
 

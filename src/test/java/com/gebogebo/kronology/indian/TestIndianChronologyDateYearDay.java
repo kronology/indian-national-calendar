@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
  * Test the behavior of {@link IndianNationalChronology#dateYearDay(int, int)}.
  *
  * @author viraj
- * @since Jul 2020
+ * @since Aashadh 1942 (Jul 2020)
  */
 public class TestIndianChronologyDateYearDay {
 

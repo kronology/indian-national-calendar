@@ -11,7 +11,7 @@ import java.time.LocalDate;
  * Tests the {@code IndianNationalDate} class.
  *
  * @author viraj
- * @since Jul 2020
+ * @since Aashad 1942 (Jul 2020)
  */
 public class TestIndianNationalDate {
 

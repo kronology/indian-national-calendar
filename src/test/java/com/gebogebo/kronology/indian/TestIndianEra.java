@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
  * Tests the {@link IndianEra} class.
  *
  * @author viraj
- * @since Jul 2020
+ * @since (Aashad 1942) Jul 2020
  */
 public class TestIndianEra {
 

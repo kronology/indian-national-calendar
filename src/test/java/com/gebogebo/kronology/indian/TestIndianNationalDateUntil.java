@@ -18,7 +18,7 @@ import java.time.temporal.TemporalUnit;
  * {@link IndianNationalDate}.
  *
  * @author viraj
- * @since Jul 2020
+ * @since Aashad 1942 (Jul 2020)
  */
 public class TestIndianNationalDateUntil {
 

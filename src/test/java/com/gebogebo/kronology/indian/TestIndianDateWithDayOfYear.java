@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
  * Test the behavior of {@link IndianNationalDate#of(int, int)}.
  *
  * @author viraj
- * @since Jul 2020
+ * @since Aashad 1942 (Jul 2020)
  */
 public class TestIndianDateWithDayOfYear {
 

@@ -34,7 +34,7 @@ import java.util.Objects;
  * All the methods accept and return non-null values.
  *
  * @author viraj
- * @since Jul 2020
+ * @since Aashad 1942 (Jul 2020)
  */
 public final class IndianNationalDate implements ChronoLocalDate, Serializable {
 
@@ -43,6 +43,9 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
      */
     private static final long serialVersionUID = -8252231876281470680L;
 
+    /**
+     * Number of days in a leap and a non-leap year.
+     */
     private static final short daysInALeapYear = 366;
     private static final short daysInANonLeapYear = 365;
 
@@ -115,8 +118,11 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
     }
 
     /**
+     * Creates an instance of {@link IndianNationalDate} for the given proleptic year and day of year.
+     *
      * @param prolepticYear  the indian proleptic-year
      * @param dayOfYear      the Indian day-of-month, from 1 to 31
+     * @return               IndianNationDate instance
      */
     public static IndianNationalDate of(int prolepticYear, int dayOfYear) {
         boolean isLeapYear = IsoChronology.INSTANCE.isLeapYear(prolepticYear + YEARS_BEHIND_ISO_YEAR);
@@ -131,7 +137,7 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
     }
 
     /**
-     * Obtains the current {@code IndianNationalDate} from the {@code LocalDate} instance.
+     * Obtains a {@code IndianNationalDate} instance from the {@code LocalDate} instance.
      *
      * @param localDate           the localDate to use
      * @return                    the {@code IndianNationalDate} instance corresponding to the given {@code LocalDate}.

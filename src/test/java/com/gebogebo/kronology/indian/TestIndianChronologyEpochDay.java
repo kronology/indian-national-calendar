@@ -12,7 +12,7 @@ import java.time.temporal.ChronoField;
  * Tests the {@link IndianNationalChronology#dateEpochDay(long)}.
  *
  * @author viraj
- * @since 1-5(Sravan)-1942
+ * @since Shravan 1942 (Jul 2020)
  */
 public class TestIndianChronologyEpochDay {
 

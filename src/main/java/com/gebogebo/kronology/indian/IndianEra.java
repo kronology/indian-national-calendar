@@ -44,12 +44,18 @@ import java.time.chrono.Era;
  * This is an immutable and thread-safe enum.
  *
  * @author viraj
- * @since Jul 2020
+ * @since  Aashad 1942 (Jul 2020)
  */
 public enum IndianEra implements Era {
     BEFORE_SE,
     SE;
 
+    /**
+     * Gets the {@link IndianEra} for the given era ordinal.
+     *
+     * @param isoEra  ordinal of the IndianEra
+     * @return        corresponding instance of IndianEra
+     */
     public static IndianEra of(int isoEra) {
         switch (isoEra) {
             case 0:
@@ -61,6 +67,11 @@ public enum IndianEra implements Era {
         }
     }
 
+    /**
+     * Gets the ordinal of this {@link IndianEra} instance.
+     *
+     * @return  ordinal of this instance
+     */
     @Override
     public int getValue() {
         return ordinal();
