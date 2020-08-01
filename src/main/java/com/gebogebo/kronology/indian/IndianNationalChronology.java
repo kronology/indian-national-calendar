@@ -1,9 +1,12 @@
 package com.gebogebo.kronology.indian;
 
 import static java.lang.String.format;
+import static java.time.temporal.ChronoField.PROLEPTIC_MONTH;
+import static java.time.temporal.ChronoField.YEAR;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.chrono.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
@@ -144,7 +147,15 @@ public class IndianNationalChronology extends AbstractChronology {
 
     @Override
     public ValueRange range(ChronoField field) {
-        //TODO: implement this
-        throw new UnsupportedOperationException("This operation will be implemented soon");
+        if(!dateNow().isSupported(field)) {
+            throw new DateTimeException(format("Field %s not supported in IndianNationalChronology", field));
+        }
+
+        switch (field) {
+            case DAY_OF_MONTH:
+                return ValueRange.of(1, 30, 31);
+            default:
+                return field.range();
+        }
     }
 }

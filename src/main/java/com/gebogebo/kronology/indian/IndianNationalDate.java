@@ -1,7 +1,8 @@
 package com.gebogebo.kronology.indian;
 
 import static com.gebogebo.kronology.indian.IndianNationalChronology.YEARS_BEHIND_ISO_YEAR;
-import static java.time.temporal.ChronoField.YEAR;
+import static java.time.temporal.ChronoField.*;
+import static java.time.temporal.ChronoUnit.*;
 
 import java.io.Serializable;
 import java.time.DateTimeException;
@@ -144,7 +145,7 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
      * @throws DateTimeException  If the given {@code LocalDate} can't be mapped to a {@code IndianNationalDate}.
      */
     public static IndianNationalDate of(LocalDate localDate) {
-        int dayOfYear = localDate.get(ChronoField.DAY_OF_YEAR);
+        int dayOfYear = localDate.get(DAY_OF_YEAR);
         return (localDate.isLeapYear() ? leapMonths : months)
                 .stream()
                 .filter(m -> m.isThisMonth(dayOfYear))
@@ -292,20 +293,21 @@ public final class IndianNationalDate implements ChronoLocalDate, Serializable {
 
     @Override
     public boolean isSupported(TemporalField field) {
-        return field == ChronoField.DAY_OF_MONTH ||
-            field == ChronoField.MONTH_OF_YEAR ||
-            field == YEAR ||
-            field == ChronoField.YEAR_OF_ERA ||
-            field == ChronoField.ERA ||
-            field == ChronoField.EPOCH_DAY;
+        return field  == DAY_OF_MONTH ||
+                field == MONTH_OF_YEAR ||
+                field == YEAR ||
+                field == YEAR_OF_ERA ||
+                field == ERA ||
+                field == EPOCH_DAY ||
+                field == DAY_OF_YEAR;
     }
 
     @Override
     public boolean isSupported(TemporalUnit unit) {
-        return unit == ChronoUnit.MONTHS ||
-            unit == ChronoUnit.ERAS ||
-            unit == ChronoUnit.YEARS ||
-            unit == ChronoUnit.DAYS;
+        return unit  == MONTHS ||
+                unit == ERAS ||
+                unit == YEARS ||
+                unit == DAYS;
     }
 
     @Override
