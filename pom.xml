@@ -6,7 +6,7 @@
 
     <groupId>com.gebogebo.kronology</groupId>
     <artifactId>indian-national-calendar</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>9</maven.compiler.source>
@@ -41,4 +41,11 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub kronology Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/virajturakhia/kronology/indian-national-calendar</url>
+        </repository>
+    </distributionManagement>
 </project>
