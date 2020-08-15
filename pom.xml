@@ -45,13 +45,13 @@
         <repository>
             <id>github</id>
             <name>GitHub kronology Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/virajturakhia/kronology/indian-national-calendar</url>
+            <url>https://maven.pkg.github.com/kronology/indian-national-calendar</url>
         </repository>
 
         <snapshotRepository>
-            <id>github</id>
+            <id>github-snapshot</id>
             <name>Snapshots - GitHub kronology Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/virajturakhia/kronology/indian-national-calendar</url>
+            <url>https://maven.pkg.github.com/kronology/indian-national-calendar</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
